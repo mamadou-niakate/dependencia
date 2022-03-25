@@ -1,24 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
-
+import { ContextProvider } from './AppWrapper/AppWrapper';
+import Projects from './projects/Projects';
+import { Routes, Route } from 'react-router-dom'
+import RepositoryDependencies from './dependencies/RepositoryDependencies';
+import { Container, Typography } from '@mui/material';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ContextProvider>
+      <Container>
+        <Routes>
+          <Route path="repos" element={<Projects />} />
+          <Route path="repos/:reponame" element={<RepositoryDependencies />} />
+          <Route path="*" element={<Typography>404</Typography>} />
+        </Routes>
+      </Container>
+    </ContextProvider>
   );
 }
 
